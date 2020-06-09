@@ -63,6 +63,7 @@ async function makePeerLocal(id){
         console.log('track');
         var div = document.getElementById('videos')
         var remote = document.createElement('video')
+        remote.setAttribute('autoplay', true)
         remote.srcObject = event.streams[0]
         div.appendChild(remote)
     }
