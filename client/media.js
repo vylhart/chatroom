@@ -35,15 +35,18 @@ socket.on('resCall', (id)=>{
     makePeerLocal(id)
 })
 
-socket.on('reqCall', (id)=>{
+socket.on('reqCall',async (id)=>{
     console.log('Receiving : '+ id)
     receive.removeAttribute("disabled")
     receive.setAttribute("value", "Receiving")
     receive.addEventListener('click', ()=>{
         receive.setAttribute("value", "Connecting")
         socket.emit('resCall', id)
-        getLocalMedia()
-        makePeerRemote(id)
+        new Promise(function(resolve, reject) {
+            setTimeout(() => resolve(1), 1000); // (*)
+          })
+        .then(getLocalMedia())
+        .then(makePeerRemote(id))
     })
 })
 
