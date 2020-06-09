@@ -61,8 +61,10 @@ async function makePeerLocal(id){
     peer[id] = new RTCPeerConnection(config)
     peer[id].ontrack = (event)=>{
         console.log('track');
-        
-        remote1.srcObject = event.streams[0]
+        var div = document.getElementById('videos')
+        var remote = document.createElement('video')
+        remote.srcObject = event.streams[0]
+        div.appendChild(remote)
     }
     peer[id].addStream(localStream)
     const offer =await peer[id].createOffer()
