@@ -60,6 +60,8 @@ socket.on('answer', (id, answer)=>{
 async function makePeerLocal(id){
     peer[id] = new RTCPeerConnection(config)
     peer[id].ontrack = (event)=>{
+        console.log('track');
+        
         remote1.srcObject = event.streams[0]
     }
     peer[id].addStream(localStream)
@@ -103,9 +105,10 @@ socket.on('offer',async function(id, offer){
 
 function makePeerRemote(id){
     peer[id] = new RTCPeerConnection(config)
-    log(localStream)
     peer[id].addStream(localStream)
     peer[id].ontrack = (event)=>{
+        console.log('track');
+        
         remote1.srcObject = event.streams[0]
     }
 }
