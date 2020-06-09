@@ -103,6 +103,9 @@ socket.on('offer',async function(id, offer){
 function makePeerRemote(id){
     peer[id] = new RTCPeerConnection(config)
     peer[id].addStream(localStream)
+    peer[id].ontrack = (event)=>{
+        remote1.srcObject = event.streams[0]
+    }
 }
 
 socket.on('ice', (id, ice)=>{
