@@ -42,11 +42,8 @@ socket.on('reqCall',async (id)=>{
     receive.addEventListener('click', ()=>{
         receive.setAttribute("value", "Connecting")
         socket.emit('resCall', id)
-        new Promise(function(resolve, reject) {
-            setTimeout(() => resolve(1), 100000); // (*)
-          })
-        .then(getLocalMedia())
-        .then(makePeerRemote(id))
+        
+        makePeerRemote(id)
     })
 })
 
@@ -105,6 +102,7 @@ socket.on('offer',async function(id, offer){
 
 function makePeerRemote(id){
     peer[id] = new RTCPeerConnection(config)
+    log(localStream)
     peer[id].addStream(localStream)
     peer[id].ontrack = (event)=>{
         remote1.srcObject = event.streams[0]
