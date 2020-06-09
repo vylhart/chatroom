@@ -9,7 +9,7 @@ socket.on('reqCall',(id)=>{
     receive.addEventListener('click', ()=>{
         receive.setAttribute("value", "Connecting")
         socket.emit('resCall', id)
-        makePeerRemote(id)
+        makePeer(id)
     })
 })
 
