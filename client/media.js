@@ -42,8 +42,8 @@ socket.on('reqCall', (id)=>{
     receive.addEventListener('click', ()=>{
         receive.setAttribute("value", "Connecting")
         socket.emit('resCall', id)
-        makePeerRemote(id)
         getLocalMedia()
+        makePeerRemote(id)
     })
 })
 
