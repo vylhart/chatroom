@@ -43,7 +43,7 @@ socket.on('reqCall',async (id)=>{
         receive.setAttribute("value", "Connecting")
         socket.emit('resCall', id)
         new Promise(function(resolve, reject) {
-            setTimeout(() => resolve(1), 1000); // (*)
+            setTimeout(() => resolve(1), 100000); // (*)
           })
         .then(getLocalMedia())
         .then(makePeerRemote(id))
