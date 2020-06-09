@@ -12,6 +12,7 @@ function getLocalMedia(){
     })
     .catch((e)=>showError(e))
 }
+getLocalMedia()
 
 const config = {
     'iceServers': [
