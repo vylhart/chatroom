@@ -47,7 +47,15 @@ function makePeer(id){
     peer[id] = new RTCPeerConnection(config)
     peer[id].addStream(localStream)
     peer[id].ontrack = getRemoteStream
-    peer[id].onconnectionstatechange = onConnection
+    peer[id].onconnectionstatechange = (event)=>{
+        if(peer[id].connectionstate ==='connected'){
+            conn = true
+            console.log('Peer connected: '+ id)  
+        }
+        access.setAttribute('hidden', true)
+        call.setAttribute('hidden', true)
+        receive.setAttribute('value', 'Connected')
+    }
 }
 
 async function makePeerLocal(id){
@@ -61,18 +69,6 @@ async function makePeerLocal(id){
             socket.emit('ice', id, event.candidate)
         }
     }
-}
-
-function onConnection(event){
-    if(peer[id].connectionstate ==='connected'){
-        conn = true
-        console.log('Peer connected: '+ id)  
-    }
-    access.setAttribute('hidden', true)
-    call.setAttribute('hidden', true)
-    receive.setAttribute('value', 'Connected')
-
-
 }
 
 function getRemoteStream(event){
